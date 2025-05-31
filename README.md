@@ -2,4 +2,6 @@
 Open Source
 
 
-![](PCB_draft1.png)
+![](PCB_draft2.png)
+
+![](PCB_draft2_EasyEDA.png)
