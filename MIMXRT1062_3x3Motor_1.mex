@@ -100,6 +100,11 @@
                         <data>true</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="Peripheral" resourceId="LPSPI3" description="Peripheral LPSPI3 signals are routed in the Pins Tool, but the peripheral is not initialized in the Peripherals Tool." problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Pins initialization requires the COMMON Driver in the project." problem_level="2" source="Pins:BOARD_InitPins">
                      <feature name="enabled" evaluation="equal" configuration="core0">
                         <data>true</data>
@@ -210,11 +215,13 @@
                   <pin peripheral="ADC1" signal="IN, 11" pin_num="J12" pin_signal="GPIO_AD_B1_06"/>
                   <pin peripheral="ADC1" signal="IN, 12" pin_num="K10" pin_signal="GPIO_AD_B1_07"/>
                   <pin peripheral="ADC1" signal="IN, 13" pin_num="H13" pin_signal="GPIO_AD_B1_08"/>
-                  <pin peripheral="ADC1" signal="IN, 14" pin_num="M13" pin_signal="GPIO_AD_B1_09"/>
                   <pin peripheral="ADC1" signal="IN, 15" pin_num="L13" pin_signal="GPIO_AD_B1_10"/>
                   <pin peripheral="ADC2" signal="IN, 1" pin_num="H12" pin_signal="GPIO_AD_B1_12"/>
-                  <pin peripheral="ADC2" signal="IN, 2" pin_num="H11" pin_signal="GPIO_AD_B1_13"/>
                   <pin peripheral="ADC2" signal="IN, 3" pin_num="G12" pin_signal="GPIO_AD_B1_14"/>
+                  <pin peripheral="LPSPI3" signal="SCK" pin_num="M14" pin_signal="GPIO_AD_B0_00"/>
+                  <pin peripheral="ADC1" signal="IN, 14" pin_num="M13" pin_signal="GPIO_AD_B1_09"/>
+                  <pin peripheral="LPSPI3" signal="SDI" pin_num="H11" pin_signal="GPIO_AD_B1_13"/>
+                  <pin peripheral="LPSPI3" signal="SDO" pin_num="H10" pin_signal="GPIO_AD_B0_01"/>
                </pins>
             </function>
          </functions_list>
