@@ -1,0 +1,12 @@
+Revision history:
+From V2.0 to V2.1 2025-07-27
+1. Fix FATAL bug Replace 1.1V FPGA power supply TPS62840 to ..41 for correct 1.1V supply (not 2.5 with old ..40)
+2. Fix bug missing GND connection at 3.3V suply circuit. U23 pin-2 was not connected.
+3. Fix bug rewire EN at U23 pin-3 now hard wired to 5V.
+4. Fix bug. Swap Silk screen comment BOOT_MODE0 and 1
+5. Swap POR_B hi/low Pull up 3.3 reset to GND
+6. Fix bug missed connect the N6 Ball should be connecte to same as P6 according to Teensy USB1 OTG wound not work without this N6 attached
+7. DCDC_PSWITCH need a toggle reset pin. Weak 10k pull up to 3.3V and pull down to GND to reset.
+8. Fix FATAL bug. VCCA_BR rewired to 1.2V (not 3.3V fry the gclk clock grid)
+9. Fix power rail bug swap power to F10,F4 to now F10, VCCIO3A_3B to 3.3V and F4 VCCIO1E to 1.8V
+10. R12 pull up instead of pull down. Also add a program push buttom switch SW2 for pull down pulse to make USB1 blank programming mode possible.
