@@ -1,0 +1,44 @@
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ dd if=/dev/zero of=loop.bin bs=1 count=12
+12+0 records in
+12+0 records out
+12 bytes copied, 0,000612946 s, 19,6 kB/s
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ printf '\x00\x20\x00\x20' | dd of=loop.bin bs=1 seek=0 conv=notrunc
+4+0 records in
+4+0 records out
+4 bytes copied, 0,0002594 s, 15,4 kB/s
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ printf '\x09\x00\x00\x20' | dd of=loop.bin bs=1 seek=4 conv=notrunc
+4+0 records in
+4+0 records out
+4 bytes copied, 9,8445e-05 s, 40,6 kB/s
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ printf '\xff\xe7\x00\x00' | dd of=loop.bin bs=1 seek=8 conv=notrunc
+4+0 records in
+4+0 records out
+4 bytes copied, 0,000182695 s, 21,9 kB/s
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ hexdump -C loop.bin
+00000000  00 20 00 20 09 00 00 20  ff e7 00 00              |. . ... ....|
+0000000c
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- write-file 0x20000000 loop.bin 
+Preparing to send 12 (0xc) bytes to the target.
+(1/1)100% Completed!
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+Reponse Status = 2290649224 (0x88888888) Write File complete.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ # Manual reset
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- error-status
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+Reponse Status = 4042322160 (0xf0f0f0f0) HAB Success.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- read-register 0x20000000
+00 20 00 20 
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- read-register 0x20000004
+09 00 00 20 
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- read-register 0x20000008
+ff e7 00 00 
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- jump-address 0x20000000
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ ./sdphost -u 0x1fc9,0x0135 -- error-status
+Status (HAB mode) = 1450735702 (0x56787856) HAB disabled.
+Reponse Status = 858993459 (0x33333333) HAB failure.
+(base) olle@olle-SSD-256:~/nxp_flashloader/mcu-boot-utility/tools/sdphost/linux/amd64$ 
+
